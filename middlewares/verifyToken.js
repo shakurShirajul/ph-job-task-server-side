@@ -1,6 +1,4 @@
 import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
-
 const verifyToken = async (req, res, next) => {
   const token = req.cookies?.token;
   if (!token) {
