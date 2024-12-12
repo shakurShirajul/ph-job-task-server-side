@@ -2,25 +2,29 @@ import mongoose from "mongoose";
 
 const vocabularySchema = new mongoose.Schema(
     {
-        word: {
+        vocabulary_word: {
             type: String,
             required: true,
             trim: true
         },
-        pronunciation: {
+        vocabulary_pronunciation: {
             type: String,
             required: true
         },
-        whenToSay: {
+        vocabulary_meaning:{
             type: String,
             required: true
         },
-        lesson: {
+        vocabulary_whenToSay: {
+            type: String,
+            required: true
+        },
+        vocabulary_lesson: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Lesson',
             required: true
-        },
-        adminEmail: {
+        }],
+        vocabulary_addedBy: {
             type: String,
             required: true
         }
