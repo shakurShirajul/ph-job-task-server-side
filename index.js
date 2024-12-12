@@ -173,10 +173,7 @@ app.post("/create-vocabulary", verifyToken, async (req, res) => {
         return res.status(403).send({ message: 'forbidden access' })
     }
     const { vocabulary_word, vocabulary_pronunciation, vocabulary_meaning, vocabulary_whenToSay, vocabulary_lessonId, } = req.body;
-
-
     try {
-        // Create a new vocabulary
         const newVocabulary = new Vocabulary({
             vocabulary_word,
             vocabulary_pronunciation,
@@ -185,21 +182,15 @@ app.post("/create-vocabulary", verifyToken, async (req, res) => {
             vocabulary_lesson: vocabulary_lessonId,
             vocabulary_addedBy: req.query.email,
         });
-
-        // Save the vocabulary
         const savedVocabulary = await Vocabulary.create(newVocabulary);
-
-        // Find the lesson and update its vocabularies
         const updatedLesson = await Lesson.findByIdAndUpdate(
             vocabulary_lessonId,
-            { $push: { lesson_vocabularies: savedVocabulary._id } }, // Add vocabulary ID to lesson_vocabularies
-            { new: true } // Return the updated lesson
+            { $push: { lesson_vocabularies: savedVocabulary._id } }, 
+            { new: true } 
         );
-
         if (!updatedLesson) {
             return res.status(404).json({ error: "Lesson not found" });
         }
-
         res.status(201).json({
             message: "Vocabulary created and added to the lesson successfully",
             vocabulary: savedVocabulary,
@@ -461,7 +452,7 @@ app.get('/tutorials', verifyToken, async (req, res) => {
     }
 });
 app.get('/', (req, res) => {
-    res.send("Hello World");
+    res.send("Hello Japanese");
 })
 
 app.listen(PORT, () => {
