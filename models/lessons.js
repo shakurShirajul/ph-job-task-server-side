@@ -25,13 +25,9 @@ const lessonSchema = new mongoose.Schema(
         timestamps: true
     }
 );
-
-
 lessonSchema.pre('save', function (next) {
     this.lesson_vocabulary = this.lesson_vocabularies.length; 
     next();
 });
-
-
 export const Lesson = mongoose.model('Lesson', lessonSchema);
 
