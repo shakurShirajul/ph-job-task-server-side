@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const vocabularySchema = new mongoose.Schema(
     {
         vocabulary_word: {
