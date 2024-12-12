@@ -10,6 +10,7 @@ import { Users } from "./models/users.js"
 import { Lesson } from "./models/lessons.js";
 import { Vocabulary } from "./models/vocabularies.js";
 import { Tutorial } from "./models/tutorials.js";
+import 'dotenv/config';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,7 +22,6 @@ app.use(express.json());
 app.use(
     cors({
         origin: ["http://localhost:5173", "https://bentolearn.netlify.app/"],
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
         credentials: true,
     })
 );
