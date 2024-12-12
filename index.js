@@ -20,7 +20,7 @@ database();
 app.use(express.json());
 app.use(
     cors({
-        origin: ["http://localhost:5173"],
+        origin: ["http://localhost:5173", "https://bentolearn.netlify.app/"],
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
         credentials: true,
     })
@@ -185,8 +185,8 @@ app.post("/create-vocabulary", verifyToken, async (req, res) => {
         const savedVocabulary = await Vocabulary.create(newVocabulary);
         const updatedLesson = await Lesson.findByIdAndUpdate(
             vocabulary_lessonId,
-            { $push: { lesson_vocabularies: savedVocabulary._id } }, 
-            { new: true } 
+            { $push: { lesson_vocabularies: savedVocabulary._id } },
+            { new: true }
         );
         if (!updatedLesson) {
             return res.status(404).json({ error: "Lesson not found" });
