@@ -152,7 +152,6 @@ app.get('/users/checking', verifyToken, async (req, res) => {
     }
 });
 
-
 // Get all users API
 app.get("/users", verifyToken, async (req, res) => {
     if (req.query.email !== req.user.email) {
