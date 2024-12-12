@@ -454,25 +454,8 @@ app.get('/tutorials', verifyToken, async (req, res) => {
         if (req.query.email !== req.user.email) {
             return res.status(403).json({ message: "Forbidden access" });
         }
-
-        const user = await Users.findOne({ user_email: req.query.email });
-        if (!user || user.user_role !== "admin") {
-            return res.status(403).json({ message: "Admin access required" });
-        }
-        const { tutorial_title, tutorial_link } = req.body;
-        if (!tutorial_title || !tutorial_link) {
-            return res.status(400).json({ message: "Tutorial title and link are required" });
-        }
-        const newTutorial = {
-            tutorial_title,
-            tutorial_link,
-            tutorial_addedBy: req.query.email,
-        };
-        const responseTutorial = await Tutorial.create(newTutorial);
-        return res.status(201).json({
-            message: "Tutorial added successfully",
-            tutorial: responseTutorial
-        });
+        const tutorial = await Tutorial.find({});
+        return res.status(201).json(tutorial);
     } catch (error) {
         console.error("Error in add-tutorial API:", error);
         return res.status(500).json({ message: "Internal server error" });
