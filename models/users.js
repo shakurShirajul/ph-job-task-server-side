@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const userSchema = new mongoose.Schema({
     user_name : {
         type : String,
@@ -27,5 +26,4 @@ const userSchema = new mongoose.Schema({
         required: true,
     }
 })
-
 export const Users = mongoose.model("users", userSchema)
